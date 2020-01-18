@@ -1,0 +1,27 @@
+sudo: required
+services:
+  - docker
+
+
+before_install:
+  - docker build -t sahilsoni317/react-test -f ./client/Dockerfile.dev ./client
+
+
+script:  #thisis the test sections and if we get output other then 0 then travis build will fail.
+  -  docker run sahilsoni317/react-test npm test -- --coverage
+
+
+after_success:
+  - docker build -t sahilsoni317/multi-client ./client
+  - docekr build -t sahilsoni317/multi-nginx ./nginx
+  - docker build -t sahilsoni317/multi-server ./server
+  - docker build -t sahilsoni317/multi-worker ./worker
+
+
+  #first login to docker CLI or docker hub
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  #push to images to Docker hub
+  - docker push sahilsoni317/multi-client
+  - docker push sahilsoni317/multi-nginx
+  - docker push sahilsoni317/multi-server
+  - docker push sahilsoni317/multi-worker
