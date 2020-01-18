@@ -25,3 +25,16 @@ after_success:
   - docker push sahilsoni317/multi-nginx
   - docker push sahilsoni317/multi-server
   - docker push sahilsoni317/multi-worker
+
+  #now tell AWS to deply by passing the dockerun.aws.json file
+deploy:
+  provider: elasticbeanstalk
+  region: "us-west-2"
+  app: "multi-docker"
+  env: "MultiDocker-env"
+  bucket_name: "elasticbeanstalk-us-west-2-836656163788"
+  bucket_path: "multi-docker"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
