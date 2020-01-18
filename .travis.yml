@@ -24,4 +24,4 @@ after_success:
   - docker push sahilsoni317/multi-client
   - docker push sahilsoni317/multi-nginx
   - docker push sahilsoni317/multi-server
-  - docker push sahilsoni317/multi-worke
+  - docker push sahilsoni317/multi-worker
