@@ -13,7 +13,7 @@ script:  #thisis the test sections and if we get output other then 0 then travis
 
 after_success:
   - docker build -t sahilsoni317/multi-client ./client
-  - docekr build -t sahilsoni317/multi-nginx ./nginx
+  - docker build -t sahilsoni317/multi-nginx ./nginx
   - docker build -t sahilsoni317/multi-server ./server
   - docker build -t sahilsoni317/multi-worker ./worker
 
@@ -24,4 +24,4 @@ after_success:
   - docker push sahilsoni317/multi-client
   - docker push sahilsoni317/multi-nginx
   - docker push sahilsoni317/multi-server
-  - docker push sahilsoni317/multi-worker
+  - docker push sahilsoni317/multi-worke
